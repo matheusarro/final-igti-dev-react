@@ -5,13 +5,12 @@ import { iMatchInfo, iRoundInfo, iTeamResult } from "../interfaces";
 const getStandingsInfo = async (year: number) : Promise<iTeamResult[]> => {
   try {
     const results : iRoundInfo[] = await apiGetYearInfo(year);  // pega as informações da API
-    const round : iRoundInfo[] = results.filter(round => round.numero === results.length);  // filtra para achar a última rodada
-    const lastRound: iRoundInfo = round[0];   // pega a última rodada
-    const roundMatches : iMatchInfo[] = lastRound.partidas;   // pega somente as partidas da última rodada
+    const lastRound : iRoundInfo[] = results.filter(round => round.numero === Math.max(...results.map(round => round.numero), 0));  // filtra a rodada cujo número é igual ao maior número encontrado
+    const lastRoundInfo: iRoundInfo = lastRound[0];   // pega as informações da última rodada
+    const roundMatches : iMatchInfo[] = lastRoundInfo.partidas;   // pega somente as partidas da última rodada
 
     const teamsScores : iTeamResult[] = collectTeamsData(roundMatches);   // pega as informações dos times com base na última rodada
 
-    console.log(teamsScores); //---------------------------
     return teamsScores;
 
   } catch (error) {
