@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { PageContainer, PageHeader } from "../components/atoms"
-import { YearSelector } from "../components/molecules";
+import { TeamLine, YearSelector } from "../components/molecules";
 import { selectableYears } from "../helpers";
 import { iTeamResult } from "../interfaces";
 import { getStandingsInfo } from "../services";
@@ -43,6 +43,22 @@ const ChampionshipStandings = () => {
         <PageContainer>
           <YearSelector year={yearsList[yearIndex]} clickHandler={handleYearSelection} />
         </PageContainer>
+        {
+          standingsList?.map( (team, index) => 
+            <TeamLine
+              index={index + 1}
+              time={team.time}
+              slug={team.slug}
+              pontos={team.pontos}
+              vitorias={team.vitorias}
+              empates={team.empates}
+              derrotas={team.derrotas}
+              gols_marcados={team.gols_marcados}
+              gols_sofridos={team.gols_sofridos}
+              saldo_gols={team.saldo_gols}
+            />
+          )
+        }
       </main>
       {/* <footer>
         FOOTER

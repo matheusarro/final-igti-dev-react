@@ -1,3 +1,4 @@
-import YearSelector from "./YearSelector";
+import TeamLine from './TeamLine';
+import YearSelector from './YearSelector';
 
-export {YearSelector};
+export {TeamLine, YearSelector};
