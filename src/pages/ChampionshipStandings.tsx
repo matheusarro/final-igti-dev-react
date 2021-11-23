@@ -46,6 +46,7 @@ const ChampionshipStandings = () => {
         {
           standingsList?.map( (team, index) => 
             <TeamLine
+              key={team.slug}
               index={index + 1}
               time={team.time}
               slug={team.slug}
